@@ -24,7 +24,7 @@ class ChatFragment : Fragment() {
 
         val chatButton = view.findViewById<Button>(R.id.chat_button)
         chatButton.setOnClickListener {
-            findNavController().navigate(ChatFragmentDirections.actionChatFragmentToStatusFragment())
+            findNavController().navigate(ChatFragmentDirections.actionChatFragmentToStatusFragment(name = "Mavia"))
         }
     }
 }

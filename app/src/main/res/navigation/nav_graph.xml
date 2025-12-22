@@ -19,7 +19,12 @@
         android:id="@+id/statusFragment"
         android:name="com.example.winfragmentxml.fragments.StatusFragment"
         android:label="fragment_status"
-        tools:layout="@layout/fragment_status" />
+        tools:layout="@layout/fragment_status">
+        <argument
+            android:name="name"
+            android:defaultValue="Uzair"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/callsFragment"
