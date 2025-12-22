@@ -9,7 +9,11 @@
         android:id="@+id/chatFragment"
         android:name="com.example.winfragmentxml.fragments.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat">
+        <action
+            android:id="@+id/action_chatFragment_to_statusFragment"
+            app:destination="@id/statusFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/statusFragment"
