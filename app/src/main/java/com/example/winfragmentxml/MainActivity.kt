@@ -1,6 +1,7 @@
 package com.example.winfragmentxml
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -49,6 +50,20 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.setupWithNavController(navController)
         drawerNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.setting1Fragment -> {
+                    bottomNav.visibility = View.GONE
+                }
+
+                R.id.setting2Fragment -> {
+                    bottomNav.visibility = View.GONE
+                }
+
+                else -> bottomNav.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
