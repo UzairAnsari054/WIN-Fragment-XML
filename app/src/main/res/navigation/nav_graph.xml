@@ -31,4 +31,16 @@
         android:name="com.example.winfragmentxml.fragments.CallsFragment"
         android:label="Calls"
         tools:layout="@layout/fragment_calls" />
+
+    <fragment
+        android:id="@+id/setting1Fragment"
+        android:name="com.example.winfragmentxml.Setting1Fragment"
+        android:label="Setting 1"
+        tools:layout="@layout/fragment_setting1" />
+
+    <fragment
+        android:id="@+id/setting2Fragment"
+        android:name="com.example.winfragmentxml.Setting2Fragment"
+        android:label="Setting 2"
+        tools:layout="@layout/fragment_setting2" />
 </navigation>

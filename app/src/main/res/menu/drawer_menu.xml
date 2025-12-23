@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/setting1Fragment"
+        android:icon="@drawable/settings"
+        android:title="@string/setting_1" />
+
+    <item
+        android:id="@+id/setting2Fragment"
+        android:icon="@drawable/settings"
+        android:title="@string/setting_2" />
+</menu>

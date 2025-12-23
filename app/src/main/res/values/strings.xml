@@ -10,6 +10,15 @@
     <string name="calls_fragment">Calls fragment</string>
     <string name="calls">Calls</string>
 
-    <string name="accounts_fragment">Profile Account fragment</string>
+    <string name="accounts_fragment">Account fragment</string>
+    <string name="accounts">Account</string>
+
+    <string name="setting_1_fragment">Setting 1 fragment</string>
+    <string name="setting_1">Setting 1</string>
+
+    <string name="setting_2_fragment">Setting 2 fragment</string>
+    <string name="setting_2">Setting 2</string>
+
     <string name="privacy_fragment">Privacy fragment</string>
+    <string name="privacy">Privacy</string>
 </resources>

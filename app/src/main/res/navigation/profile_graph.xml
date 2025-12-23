@@ -16,8 +16,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/privacySettingsFragment"
-        android:name="com.example.winfragmentxml.PrivacySettingsFragment"
+        android:id="@+id/privacyFragment"
+        android:name="com.example.winfragmentxml.PrivacyFragment"
         android:label="fragment_privacy_settings"
         tools:layout="@layout/fragment_privacy_settings">
         <argument
