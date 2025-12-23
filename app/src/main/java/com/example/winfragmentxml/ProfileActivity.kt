@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import kotlinx.coroutines.launch
 
@@ -48,8 +47,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         // get the access to navController
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.profile_container) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.profile_container) as NavHostFragment
         val navController = navHostFragment.navController
 
         // Pass the argument to startDestination Fragment
@@ -59,8 +57,8 @@ class ProfileActivity : AppCompatActivity() {
         // Pass the argument to sibling Fragment
         val privacyButton = findViewById<Button>(R.id.privacy_button)
         privacyButton.setOnClickListener {
-            val privacyBundle = PrivacySettingsFragmentArgs(name = name).toBundle()
-            navController.navigate(R.id.privacySettingsFragment, privacyBundle)
+            val privacyBundle = PrivacyFragmentArgs(name = name).toBundle()
+            navController.navigate(R.id.privacyFragment, privacyBundle)
         }
     }
 }

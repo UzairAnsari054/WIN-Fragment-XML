@@ -10,14 +10,13 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
-class PrivacySettingsFragment : Fragment() {
+class PrivacyFragment : Fragment() {
 
     private val viewModel: ProfileViewModel by activityViewModels()
-    private val args: PrivacySettingsFragmentArgs by navArgs()
+    private val args: PrivacyFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
