@@ -8,15 +8,15 @@
 
     <!-- TODO: Update blank fragment layout -->
     <Button
-        android:id="@+id/chat_button"
+        android:id="@+id/status_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/chat_fragment" />
+        android:text="Go to Fragment Status" />
 
     <Button
         android:id="@+id/profile_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Profile" />
+        android:text="Go to Activity Profile" />
 
 </LinearLayout>
