@@ -1,72 +1,90 @@
 package com.example.winfragmentxml
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.navigation.NavController
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+import com.example.winfragmentxml.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setupWindowInsets()
+        setupNavigation()
+    }
+
+    private fun setupWindowInsets() {
+        // 1. Handle the Top (Toolbar)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.updatePadding(top = systemBars.top)
             insets
         }
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
-        navController = navHostFragment.navController
-
-        drawerLayout = findViewById(R.id.drawerLayout)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.chatFragment), drawerLayout)
-
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_container)
-        val drawerNav = findViewById<NavigationView>(R.id.drawer_nav_container)
-
-        bottomNav.setupWithNavController(navController)
-        drawerNav.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.setting1Fragment -> {
-                    bottomNav.visibility = View.GONE
-                }
-
-                R.id.setting2Fragment -> {
-                    bottomNav.visibility = View.GONE
-                }
-
-                else -> bottomNav.visibility = View.VISIBLE
-            }
+        // 2. Handle the Bottom (Bottom Navigation)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavContainer) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(bottom = systemBars.bottom)
+            insets
         }
     }
 
+    private fun setupNavigation() {
+        // 1. Get NavController via supportFragmentManager
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+        navController = navHostFragment.navController
+
+        // 2. Configure App Bar (Top-level destinations show the Hamburger menu)
+        //    Add other top-level fragments here binding.drawerLayout
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.chatFragment), binding.drawerLayout)
+
+        // 3. Get and set Toolbar
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        // 4. Connect BottomNav and Drawer
+        binding.bottomNavContainer.setupWithNavController(navController)
+        binding.drawerNavContainer.setupWithNavController(navController)
+
+        // 5. Optimized Visibility Listener
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            handleBottomNavVisibility(destination.id)
+        }
+    }
+
+    private fun handleBottomNavVisibility(destinationId: Int) {
+        // Define screens where BottomNav should be HIDDEN
+        val hideBottomNavOnDestinations = setOf(
+            R.id.setting1Fragment,
+            R.id.setting2Fragment
+        )
+
+        val shouldShow = destinationId !in hideBottomNavOnDestinations
+        binding.bottomNavContainer.isVisible = shouldShow
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration)
+        // Handles the hamburger menu click or back arrow
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
