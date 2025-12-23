@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "WIN Fragment XML"
+rootProject.name = "WIN XML"
 include(":app")
